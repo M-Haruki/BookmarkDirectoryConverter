@@ -11,15 +11,21 @@
         <h1>Bookmark Directory Converter</h1>
         <div>
             <h2>Export</h2>
-            <button id="btn-export">Export(.link)</button>
+            <button id="btn-export-url">Export(.url)</button>
+            <button id="btn-export-txt">Export(.txt)</button>
         </div>
         <div>
             <h2>Import</h2>
-            <input type="file" id="fileInput" onchange="alert('ok')" />
+            <button id="btn-import">Submit</button>
+            <h3>from zip</h3>
+            <input type="file" id="input-file" accept="application/zip" />
+            <h3>from directory</h3>
+            <input type="file" id="input-directory" webkitdirectory />
         </div>
     </div>
     <script src="lib/jszip.min.js"></script>
     <script src="export.js"></script>
+    <script src="import.js"></script>
 </body>
 
 </html>

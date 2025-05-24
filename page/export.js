@@ -1,15 +1,16 @@
 function init() {
-    document.getElementById("btn-export").addEventListener("click", exportData);
+    document.getElementById("btn-export-url").addEventListener("click", () => exportData("url"));
+    document.getElementById("btn-export-txt").addEventListener("click", () => exportData("txt"));
 }
 
-async function exportData() {
+async function exportData(filetype) {
     const bookmarks = await browser.bookmarks.getTree();
     const zip = new JSZip();
-    createFileData(zip, bookmarks);
+    createFileData(filetype, zip, bookmarks);
     zip.generateAsync({ type: "blob" }).then((content) => downloadFile(content, "bookmarks.zip", "application/zip"));
 }
 
-function createFileData(zip, array) {
+function createFileData(filetype, zip, array) {
     array.forEach((item) => {
         // name
         let name = item.title.replace(/[\\/:*?"<>|]/g, "_");
@@ -22,10 +23,18 @@ function createFileData(zip, array) {
         //
         if (item.type === "folder") {
             let folder = zip.folder(name);
-            createFileData(folder, item.children);
+            createFileData(filetype, folder, item.children);
         } else if (item.type === "bookmark") {
-            let fileName = name + ".url";
-            let fileContent = `[InternetShortcut]\nURL=${item.url}\n`;
+            let fileName, fileContent;
+            if (filetype === "txt") {
+                fileName = name + ".txt";
+                fileContent = `${item.title}\n${item.url}\n`;
+            } else if (filetype === "url") {
+                // Create a .url file for Windows
+                // Format: [InternetShortcut]\nURL=<URL>
+                fileName = name + ".url";
+                fileContent = `[InternetShortcut]\nURL=${item.url}\n`;
+            }
             zip.file(fileName, fileContent);
         }
     });
@@ -41,6 +50,7 @@ function downloadFile(content, filename, type) {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+    console.log(`File ${filename} downloaded successfully.`);
 }
 
 init();
