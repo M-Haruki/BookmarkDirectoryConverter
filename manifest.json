@@ -1,0 +1,20 @@
+{
+    "manifest_version": 2,
+    "name": "Bookmark Directory Converter",
+    "version": "0.1",
+    "description": "A browser extension that converts bookmarks into a directory structure and a directory structure into bookmarks.",
+    "homepage_url": "https://github.com/M-Haruki/BookmarkDirectoryChanger",
+    "icons": {
+        "32": "icons/icon32.png",
+        "64": "icons/icon64.png"
+    },
+    "permissions": [
+        "activeTab",
+        "bookmarks"
+    ],
+    "browser_action": {
+        "default_icon": "icons/icon32.png",
+        "default_title": "Bookmark Directory Converter",
+        "default_popup": "popup/main.html"
+    }
+}
