@@ -1,17 +1,12 @@
-function addEventListeners() {
+function init() {
     document.getElementById("btn-export").addEventListener("click", exportData);
 }
 
-function downloadFile(content, filename, type) {
-    let blob = new Blob([content], { type: type });
-    let url = URL.createObjectURL(blob);
-    let a = document.createElement("a");
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+async function exportData() {
+    const bookmarks = await browser.bookmarks.getTree();
+    const zip = new JSZip();
+    createFileData(zip, bookmarks);
+    zip.generateAsync({ type: "blob" }).then((content) => downloadFile(content, "bookmarks.zip", "application/zip"));
 }
 
 function createFileData(zip, array) {
@@ -36,11 +31,16 @@ function createFileData(zip, array) {
     });
 }
 
-async function exportData() {
-    const bookmarks = await browser.bookmarks.getTree();
-    const zip = new JSZip();
-    createFileData(zip, bookmarks);
-    zip.generateAsync({ type: "blob" }).then((content) => downloadFile(content, "bookmarks.zip", "application/zip"));
+function downloadFile(content, filename, type) {
+    let blob = new Blob([content], { type: type });
+    let url = URL.createObjectURL(blob);
+    let a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 }
 
-addEventListeners();
+init();
