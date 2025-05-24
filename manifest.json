@@ -16,5 +16,10 @@
         "default_icon": "icons/icon32.png",
         "default_title": "Bookmark Directory Converter",
         "default_popup": "popup/main.html"
+    },
+    "options_ui": {
+        "page": "page/main.html",
+        "browser_style": true,
+        "open_in_tab": true
     }
 }

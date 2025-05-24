@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="main.css" />
+</head>
+
+<body>
+    <div id="content">
+        <h1>Bookmark Directory Converter</h1>
+        <div>
+            <h2>Export</h2>
+            <button id="btn-export">Export(.link)</button>
+        </div>
+        <div>
+            <h2>Import</h2>
+            <input type="file" id="fileInput" onchange="alert('ok')" />
+        </div>
+    </div>
+    <script src="lib/jszip.min.js"></script>
+    <script src="export.js"></script>
+</body>
+
+</html>
