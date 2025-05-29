@@ -1,9 +1,9 @@
 function init() {
-    document.getElementById("btn-export-url").addEventListener("click", () => exportData("url"));
-    document.getElementById("btn-export-txt").addEventListener("click", () => exportData("txt"));
+    document.getElementById("btn-export-url").addEventListener("click", () => exportBookmarks("url"));
+    document.getElementById("btn-export-txt").addEventListener("click", () => exportBookmarks("txt"));
 }
 
-async function exportData(filetype) {
+async function exportBookmarks(filetype) {
     const bookmarks = await browser.bookmarks.getTree();
     const zip = new JSZip();
     createFileData(filetype, zip, bookmarks);
@@ -14,8 +14,9 @@ function createFileData(filetype, zip, array) {
     array.forEach((item) => {
         // name
         let name = item.title.replace(/[\\/:*?"<>|]/g, "_");
-        if (name.length > 255) {
-            name = name.substring(0, 255);
+        if (name.length > 124) {
+            // ファイル名が長すぎると、zip解凍に失敗することがあるため、124文字(128-拡張子4文字)に制限する
+            name = name.substring(0, 124);
         }
         if (name === "") {
             name = "Untitled";
