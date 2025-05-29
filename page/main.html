@@ -11,21 +11,29 @@
         <h1>Bookmark Directory Converter</h1>
         <p>A browser extension that converts bookmarks into a directory structure and a directory structure into
             bookmarks.</p>
-        <div>
+        <div class="export">
             <h2>Export</h2>
             <p>Export all browser bookmarks by converting them into a directory structure.</p>
             <p>Bookmark names with special characters or that are too long will change automatically.</p>
-            <button id="btn-export-url">Export(.url)</button>
-            <button id="btn-export-txt">Export(.txt)</button>
+            <div class="export-options">
+                <button id="btn-export-url">Export(.url)</button>
+                <button id="btn-export-txt">Export(.txt)</button>
+            </div>
         </div>
-        <div>
+        <div class="import">
             <h2>Import</h2>
             <p>Bookmarks are saved under 'Other Bookmarks' while preserving the directory structure.</p>
+            <div class="import-options">
+                <div class="import-option">
+                    <h3>from zip file</h3>
+                    <input type="file" id="input-zip" accept="application/zip" />
+                </div>
+                <div class="import-option">
+                    <h3>from directory</h3>
+                    <input type="file" id="input-directory" webkitdirectory />
+                </div>
+            </div>
             <button id="btn-import">Submit</button>
-            <h3>from zip file</h3>
-            <input type="file" id="input-zip" accept="application/zip" />
-            <h3>from directory</h3>
-            <input type="file" id="input-directory" webkitdirectory />
         </div>
     </div>
     <script src="lib/jszip.min.js"></script>
