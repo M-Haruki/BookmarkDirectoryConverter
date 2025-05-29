@@ -32,9 +32,6 @@ async function importBookmarks() {
         files.forEach((relativePath, file) => {
             if (!file.dir) {
                 promises.push(
-                    // file.async("string").then((content) => {
-                    //     bookmarks.push(extractionBookmark(relativePath, content));
-                    // })
                     file.async("uint8array").then((uint8arr) => {
                         // テキストとしてデコード（UTF-8指定）
                         const decoder = new TextDecoder("utf-8");
