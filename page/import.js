@@ -63,10 +63,52 @@ async function importBookmarks() {
         }
         await Promise.all(promises);
     } else {
-        console.error("Please select a zip file or a directory.");
+        alert("Please select a zip file or a directory.");
         return;
     }
-    console.log(bookmarks);
+
+    // 確認ダイアログ
+    if (!confirm(`Import ${bookmarks.length} bookmarks?`)) {
+        return;
+    }
+
+    // ブックマークのツリー構造を作成し、ブックマークを追加する
+    let bookmarkTree = [];
+    for (let i = 0; i < bookmarks.length; i++) {
+        const bookmark = bookmarks[i];
+        const paths = bookmark.path.split("/");
+
+        let currentLevel = bookmarkTree;
+        let parentId = bookmarkTree.id || null; // ブックマークのルートIDを取得、なければ"root"を使用
+
+        for (let index = 0; index < paths.length; index++) {
+            const path = paths[index];
+            let existingFolder = currentLevel.find((item) => item.type === "folder" && item.title === path);
+            if (!existingFolder) {
+                const created = await browser.bookmarks.create({
+                    title: path,
+                    parentId: parentId,
+                });
+                existingFolder = { title: path, type: "folder", children: [], id: created.id };
+                currentLevel.push(existingFolder);
+            }
+            currentLevel = existingFolder.children;
+            parentId = existingFolder.id;
+
+            // 最後の要素であれば、ブックマークを追加
+            if (index === paths.length - 1) {
+                await browser.bookmarks.create({
+                    title: bookmark.name,
+                    parentId: parentId,
+                    url: bookmark.url,
+                });
+                currentLevel.push({ title: bookmark.name, type: "bookmark", url: bookmark.url });
+            }
+        }
+    }
+
+    // 完了メッセージ
+    alert(`Imported ${bookmarks.length} bookmarks successfully!`);
 }
 
 function extractionBookmark(rawPath, content) {

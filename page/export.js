@@ -6,11 +6,18 @@ function init() {
 async function exportBookmarks(filetype) {
     const bookmarks = await browser.bookmarks.getTree();
     const zip = new JSZip();
-    createFileData(filetype, zip, bookmarks);
+    const count = createFileData(filetype, zip, bookmarks);
+
+    // 確認ダイアログ
+    if (!confirm(`Are you sure you want to export ${count} bookmarks as ${filetype} files?`)) {
+        return;
+    }
+
     zip.generateAsync({ type: "blob" }).then((content) => downloadFile(content, "bookmarks.zip", "application/zip"));
 }
 
 function createFileData(filetype, zip, array) {
+    let bookmarkCount = 0;
     array.forEach((item) => {
         // name
         let name = item.title.replace(/[\\/:*?"<>|]/g, "_");
@@ -24,7 +31,7 @@ function createFileData(filetype, zip, array) {
         //
         if (item.type === "folder") {
             let folder = zip.folder(name);
-            createFileData(filetype, folder, item.children);
+            bookmarkCount += createFileData(filetype, folder, item.children);
         } else if (item.type === "bookmark") {
             let fileName, fileContent;
             if (filetype === "txt") {
@@ -37,8 +44,10 @@ function createFileData(filetype, zip, array) {
                 fileContent = `[InternetShortcut]\nURL=${item.url}\n`;
             }
             zip.file(fileName, fileContent);
+            bookmarkCount++;
         }
     });
+    return bookmarkCount;
 }
 
 function downloadFile(content, filename, type) {
@@ -51,7 +60,6 @@ function downloadFile(content, filename, type) {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    console.log(`File ${filename} downloaded successfully.`);
 }
 
 init();
