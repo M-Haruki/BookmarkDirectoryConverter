@@ -19,6 +19,7 @@ button {
 h1 {
     text-align: center;
     margin-bottom: 8px;
+    font-size: 2rem;
 }
 
 h2 {
@@ -27,10 +28,12 @@ h2 {
     top: -20px;
     padding: 0 10px;
     background-color: var(--background-color);
+    font-size: 1.5rem;
 }
 
 p {
     text-align: center;
+    font-size: 1rem;
 }
 
 h1,
@@ -103,14 +106,6 @@ body,
 .import .options .option:has(input[type="radio"]:checked) {
     z-index: 5;
 }
-.import .options .option:nth-child(1) label {
-    margin-right: auto;
-    border-radius: 8px 0 0 0;
-}
-.import .options .option:nth-child(2) label {
-    margin-left: auto;
-    border-radius: 0 8px 0 0;
-}
 
 .import .options .option label {
     width: 50%;
@@ -119,16 +114,25 @@ body,
     cursor: pointer;
     background-color: var(--dark-gray);
     z-index: 10;
+    font-size: 1rem;
 }
-
-.import .options .option input[type="radio"] {
-    display: none;
+.import .options .option:nth-child(1) label {
+    margin-right: auto;
+    border-radius: 8px 0 0 0;
+}
+.import .options .option:nth-child(2) label {
+    margin-left: auto;
+    border-radius: 0 8px 0 0;
 }
 .import .options input[type="radio"]:checked ~ label {
     background-color: var(--gray);
 }
 
-.import .options input[type="file"] {
+.import .options .option input[type="radio"] {
+    display: none;
+}
+
+.import .options .option input[type="file"] {
     font-size: 1rem;
     margin: 10px 0;
 }
