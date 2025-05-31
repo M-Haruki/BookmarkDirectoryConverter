@@ -23,5 +23,8 @@
         "page": "page/main.html",
         "browser_style": true,
         "open_in_tab": true
-    }
+    },
+    "web_accessible_resources": [
+        "assets/icon.svg"
+    ]
 }
