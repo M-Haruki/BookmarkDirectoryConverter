@@ -23,6 +23,7 @@ You can import a directory structure either from a ZIP file or directly as-is.
 Each bookmark must be saved as a `.url` or `.txt` file.
 To avoid processing errors, it's recommended to edit the exported structure before importing it.
 Imported bookmarks will be added to the "Other Bookmarks" folder.
+Empty directories in the structure will be ignored.
 
 ## 日本語
 
@@ -47,3 +48,4 @@ Imported bookmarks will be added to the "Other Bookmarks" folder.
 各ブックマークは、`.url`ファイルまたは`.txt`ファイルとして保存されている必要があります。
 処理エラーを防ぐため、基本的にはエクスポートされたものを編集してからインポートしてください。
 インポートされたブックマークは、"他のブックマーク"フォルダに追加されます。
+なお、空のディレクトリは無視されます。
