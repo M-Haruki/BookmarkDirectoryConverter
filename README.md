@@ -4,10 +4,10 @@
 
 ### Overview
 
+Manage your bookmarks efficiently, just like organizing files.
 This is a Firefox browser extension that allows you to convert between bookmarks and a directory structure.
 You can export your browser bookmarks as a directory structure while preserving their hierarchy.
 Likewise, you can import an edited directory structure back into the browser, restoring it as bookmarks with the original hierarchy intact.
-Manage your bookmarks efficiently, just like organizing files.
 
 ### Features
 
@@ -29,10 +29,10 @@ Empty directories in the structure will be ignored.
 
 ### 概要
 
+ファイルを整理するように、ブックマークを効率的に管理しましょう。
 ブックマークとディレクトリ構成を相互に変換できる、Firefox用のブラウザ拡張機能です。
 ブラウザのブックマークを、構造を保ったままディレクトリ構成に変換してエクスポートできます。
 また、エクスポート後に編集したディレクトリ構成を、構造を保ったままブラウザのブックマークとしてインポートできます。
-ファイルを整理するように、ブックマークを効率的に管理しましょう。
 
 ### 機能
 
