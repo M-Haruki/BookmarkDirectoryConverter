@@ -1,6 +1,6 @@
 # Bookmark Directory Converter
 
-## English
+## Description(English)
 
 ### Overview
 
@@ -25,7 +25,7 @@ To avoid processing errors, it's recommended to edit the exported structure befo
 Imported bookmarks will be added to the "Other Bookmarks" folder.
 Empty directories in the structure will be ignored.
 
-## 日本語
+## Description(日本語)
 
 ### 概要
 
