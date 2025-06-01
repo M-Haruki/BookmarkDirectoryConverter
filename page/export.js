@@ -9,7 +9,7 @@ async function exportBookmarks(filetype) {
     const count = createFileData(filetype, zip, bookmarks);
 
     // 確認ダイアログ
-    if (!confirm(`Are you sure you want to export ${count} bookmarks as ${filetype} files?`)) {
+    if (!confirm(i18n("exportConfirm", { count: String(count), filetype: filetype }))) {
         return;
     }
 

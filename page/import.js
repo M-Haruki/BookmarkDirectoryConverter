@@ -63,12 +63,12 @@ async function importBookmarks() {
         }
         await Promise.all(promises);
     } else {
-        alert("Please select a zip file or a directory.");
+        alert(i18n("importErrorAlert"));
         return;
     }
 
     // 確認ダイアログ
-    if (!confirm(`Import ${bookmarks.length} bookmarks?`)) {
+    if (!confirm(i18n("importConfirm", { length: String(bookmarks.length) }))) {
         return;
     }
 
@@ -108,7 +108,7 @@ async function importBookmarks() {
     }
 
     // 完了メッセージ
-    alert(`Imported ${bookmarks.length} bookmarks successfully!`);
+    alert(i18n("importSuccessAlert", { length: String(bookmarks.length) }));
 }
 
 function extractionBookmark(rawPath, content) {
