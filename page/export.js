@@ -18,6 +18,7 @@ async function exportBookmarks(filetype) {
 
 function createFileData(filetype, zip, array) {
     let bookmarkCount = 0;
+    let names = []; // 重複を避けるための名前リスト
     array.forEach((item) => {
         // name
         let name = item.title.replace(/[\\/:*?"<>|]/g, "_");
@@ -28,7 +29,17 @@ function createFileData(filetype, zip, array) {
         if (name === "") {
             name = "Untitled";
         }
-        //
+        // 名前の重複を避けるための処理
+        if (names.includes(name)) {
+            let count = 1;
+            let originalName = name;
+            while (names.includes(name)) {
+                name = `${originalName} (${count})`;
+                count++;
+            }
+        }
+        names.push(name);
+        // type
         if (item.type === "folder") {
             let folder = zip.folder(name);
             bookmarkCount += createFileData(filetype, folder, item.children);
