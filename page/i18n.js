@@ -71,11 +71,8 @@ function i18n(key, values = {}) {
         if (values.hasOwnProperty(placeholder)) {
             const regex = new RegExp(`\\{${placeholder}\\}`, "g");
             text = text.replace(regex, values[placeholder]);
-            console.log(`i18n: Replaced ${placeholder} with ${values[placeholder]} in key "${key}"`);
         }
     }
-
-    console.log(values);
 
     return text;
 }
