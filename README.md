@@ -1,5 +1,10 @@
 # Bookmark Directory Converter
 
+## Usage
+
+This extension can be installed from AMO (addons.mozilla.org).  
+https://addons.mozilla.org/firefox/addon/bookmark-directory-converter/
+
 ## Description(English)
 
 ### Overview
